@@ -1,0 +1,46 @@
+---
+interface Props {
+  tag: string;
+  icon:string
+}
+
+const { tag, icon } = Astro.props;
+---
+
+<div class="sidebar-set">
+  <div class="sidebar-set-header">
+    <span>
+      <i class={icon}></i>
+    </span>
+    <h5>{tag}</h5>
+  </div>
+  <slot />
+</div>
+
+<style>
+  .sidebar-set {
+    width: 100%;
+    padding: 1rem 0.75rem;
+    background-color: #1a2352;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    gap: 15px;
+    border: 1px solid var(--sm-light-blue);
+    margin-block: 10px;
+  }
+
+  .sidebar-set .sidebar-set-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid var(--light-blue);
+    padding: 1px 7px;
+    border-radius: 20px;
+    color: var(--light-blue);
+    opacity: 0.4;
+  }
+</style>

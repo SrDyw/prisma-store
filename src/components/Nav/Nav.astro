@@ -1,0 +1,201 @@
+---
+import SidebarSet from "./SidebarSet.astro";
+import SidebarElement from "./SidebarElement.astro";
+import NavAccount from "./NavAccount.astro";
+---
+
+<script>
+  const search_input = document.getElementById("search");
+  const toggle_nav = document.querySelector(".toggle-nav");
+  const sidebar = document.querySelector(".sidebar");
+
+  toggle_nav.addEventListener("click", function () {
+    //  toggle on toggle_nav the class "active"
+    if (toggle_nav.classList.contains("nav-active")) {
+      toggle_nav.classList.remove("nav-active");
+      sidebar.classList.remove("sidebar-active");
+    } else {
+      toggle_nav.classList.add("nav-active");
+
+      sidebar.classList.add("sidebar-active");
+    }
+  });
+
+  document.querySelector(".search-bar").addEventListener("click", function () {
+    // Do focus on input element with class search
+    search_input.focus();
+  });
+  // Show a log in cosole when element with search class is on focus and the enter key was pressed
+  search_input.addEventListener("keyup", function (e) {
+    if (e.keyCode == 13) {
+      alert(`Searching ${search_input.value}`);
+    }
+  });
+</script>
+
+<nav>
+  <ul>
+    <li>
+      <div class="toggle-nav">
+        <!-- <box-icon name='menu'></box-icon> -->
+        <i class="bx bx-menu"></i>
+        <i class="bx bx-x"></i>
+      </div>
+    </li>
+    <li>
+      <div class="search-bar">
+        <span class="search-icon">
+          <i class="bx bx-search"></i>
+        </span>
+        <input
+          id="search"
+          class="search"
+          type="text"
+          name=""
+          id=""
+          placeholder="Laptop Gamer..."
+        />
+      </div>
+    </li>
+    <li>
+      <NavAccount/>
+    </li>
+  </ul>
+  <div class="sidebar">
+    <div class="sidebar-content">
+      <h3 style="margin-bottom: 20px;">Prisma Store</h3>
+      <SidebarSet tag="Pages" icon="bx bxs-card">
+        <SidebarElement tag="Home" icon="bx bxs-home"/>
+        <SidebarElement tag="About" icon="bx bx-detail"/>
+      </SidebarSet>
+
+      <SidebarSet tag="Ecomerce" icon="bx bxl-shopify">
+        <SidebarElement tag="Sell" icon="bx bxs-purchase-tag"/>
+      </SidebarSet>
+    </div>
+  </div>
+</nav>
+
+<style>
+  :root {
+    --nav-width: 65px;
+    --side-width: 14rem;
+  }
+
+  .sidebar-element {
+  }
+
+  .sidebar {
+    position: absolute;
+    top: var(--nav-width);
+    left: -40px; /* Hide on load */
+    width: 0;
+    height: calc(100vh - var(--nav-width)); /* Full-height sidebar/background */
+    background: #171d2e; /* Gray background color */
+    transition: all 0.3s ease; /* Smooth transitions */
+    z-index: 99; /* Specify what should be on top */
+    overflow: hidden;
+    border-right: 1px solid var(--sm-light-blue);
+  }
+  .sidebar-active {
+    width: var(--side-width);
+    left: 0;
+  }
+  .sidebar-content {
+    position: absolute;
+    color: white;
+    width: var(--side-width);
+    padding: 10px;
+  }
+  nav {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: var(--nav-width);
+    padding: 0.2rem;
+    background-color: #13151a36;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #4a526648;
+    z-index: 100;
+  }
+
+  nav ul {
+    display: grid;
+    grid-template-columns: 2fr 6fr 2fr;
+    height: 100%;
+    width: 100vw;
+  }
+  nav ul li {
+    box-sizing: border-box;
+    padding-inline: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  nav ul li:nth-child(even) {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+
+  .toggle-nav {
+    width: 40px;
+    aspect-ratio: 1;
+    /* background-color: ; */
+    border-radius: 5px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 25px;
+    color: #7985c7;
+  }
+  .toggle-nav i {
+  }
+  .nav-active .bx-menu {
+    display: none;
+  }
+  .nav-active .bx-x {
+    display: inline;
+  }
+  .bx-x {
+    display: none;
+  }
+
+  .search-bar {
+    position: relative;
+    flex: 1 1 auto;
+    max-width: 300px;
+    height: calc(100% - 20px);
+    padding: 10px;
+    /* display: block; */
+    margin-block: auto;
+    justify-self: end;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    background-color: #1a1d24;
+    display: flex;
+    gap: 10px;
+    border: 1px solid #13151a36;
+    border: 1px solid #4a526648;
+  }
+  .search-bar .search-icon {
+    color: #7985c7;
+  }
+
+  .search-bar .search {
+    outline: none;
+    border: none;
+    width: calc(100% - 28px);
+    color: #7985c7;
+    background-color: transparent;
+
+    /* background-color: yellow; */
+  }
+
+  
+</style>

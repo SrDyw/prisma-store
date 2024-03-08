@@ -1,0 +1,29 @@
+
+---
+interface Props {
+    tag:string;
+    icon:string
+}
+
+const {tag, icon} = Astro.props
+
+---
+
+<div class="sidebar-element">
+  <a href="/">
+    <span>
+      <i class={icon}></i>
+    </span>
+    {tag}
+  </a>
+</div>
+
+<style>
+    .sidebar-element a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        color: var(--light-blue);
+    }
+</style>
