@@ -1,6 +1,8 @@
 ---
 // @ts-ignore
 import Nav from '../components/Nav/Nav.astro';
+import Footer from '../components/footer/Footer.astro';
+import { ViewTransitions } from "astro:transitions";
 
 interface Props {
 	title: string;
@@ -19,10 +21,12 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+		<ViewTransitions/>
 	</head>
 	<body>
 		<Nav/>
 		<slot />
+		<Footer/>
 	</body>
 </html>
 <style is:global>
@@ -41,7 +45,12 @@ const { title } = Astro.props;
 		--accent-light: 224, 204, 250;
 		--accent-dark: 49, 10, 101;
 		--light-blue: #7985c7;
+		--darker-blue: #171d2e;
+		--black-blue: #13161d;
+		--dark-blue: #1a2352;
+		--primary:#0f59e4;
 		--sm-light-blue: #7985c760;
+		--body: #13151a;
 		--accent-gradient: linear-gradient(
 			45deg,
 			rgb(var(--accent)),

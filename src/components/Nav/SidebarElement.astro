@@ -2,15 +2,16 @@
 ---
 interface Props {
     tag:string;
-    icon:string
+    icon:string;
+    href:string
 }
 
-const {tag, icon} = Astro.props
+const {tag, icon, href} = Astro.props
 
 ---
 
 <div class="sidebar-element">
-  <a href="/">
+  <a href={href}>
     <span>
       <i class={icon}></i>
     </span>

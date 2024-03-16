@@ -1,15 +1,247 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Shopping from "../components/icon/undraw/Shopping.astro";
+import AboutCard from "../components/about/AboutCard.astro";
 ---
 
 <Layout title="Prisma Store">
-  <main></main>
+  <main>
+    <section class="banner" id="banner">
+      <h1>Bienvenido a <br /><span>Prisma Store</span></h1>
+      <p>
+        Tu mejor tienda de productos electrodomesticos <span
+          >bonitos y baratos</span
+        >
+      </p>
+      <div class="buttons">
+        <a href="/products">
+          <span>
+            <i class="bx bxs-cart"></i>
+          </span>
+          Start Shopping
+        </a>
+      </div>
+    </section>
+    <section id="about">
+      <h2>About Prisma</h2>
+      <div class="about-card-list">
+        <AboutCard icon="bxs-cart-alt">
+          High quality products in perfect state
+        </AboutCard>
+        <AboutCard icon="bxs-package">
+          Delivery System fast and reliable
+        </AboutCard>
+        <AboutCard icon="bxs-devices">
+          With the most recent techology for you
+        </AboutCard>
+        <AboutCard icon="bxs-purchase-tag">
+          Most of 30k customer and 100k sell by year
+        </AboutCard>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#1a2352" fill-opacity="1" d="M0,224L60,224C120,224,240,224,360,234.7C480,245,600,267,720,282.7C840,299,960,309,1080,298.7C1200,288,1320,256,1380,240L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </section>
+    <section id="faq">
+      <!-- 1a2352 -->
+      <h2>Contact Us <span style="font-size: 1rem;"><i class="bx bxs-message-detail"></i></span></h2>
+      <p>
+        If you have questions or you want to suggest something please feel free
+        for use the form below
+      </p>
+      <form class="input-group">
+        <div class="input-set">
+          <input
+            type="text"
+            name=""
+            id=""
+            required
+            placeholder="Enter your name..."
+          />
+          <input
+            type="number"
+            name=""
+            id=""
+            required
+            placeholder="Enter your number"
+          />
+        </div>
+        <div class="input-set">
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+            required
+            placeholder="What do you want to tell us..."></textarea>
+        </div>
+        <button type="submit">Submit <span><i class='bx bx-mail-send'></i></span></button>
+      </form>
+    </section>
+
+    
+  </main>
 </Layout>
 
 <style>
   main {
-    width: 100%;
-    height: 100%;
-    background-color: red;
+    margin-top: 70px;
+    color: white;
   }
+
+  section {
+    position: relative;
+    padding: 10px;
+  }
+  @media (min-width: 400px) {
+    section {
+      padding: 1rem 2rem;
+    }
+  }
+  @media (min-width: 350px) {
+    section {
+      padding: 20px;
+    }
+  }
+  .banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    background: linear-gradient(#13151a86, #13151a 90%), url("/banner.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex-direction: column;
+    padding: 0 3rem;
+    gap: 10px;
+  }
+  .banner h1 {
+    text-align: center;
+    font-size: 1.25rem;
+  }
+  .banner h1 span {
+    font-size: 1.75rem;
+    letter-spacing: 3px;
+  }
+
+  .banner p {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--light-blue);
+  }
+
+  .banner p span {
+    color: var(--light-blue);
+    font-weight: bold;
+  }
+
+  .buttons {
+    margin-top: 20px;
+  }
+
+  .buttons a {
+    padding: 0.75rem 2rem;
+    border: none;
+    outline: none;
+    background-color: var(--primary);
+    border-radius: 10px;
+    color: white;
+  }
+
+  #about {
+  }
+  #about > svg {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+  }
+
+  #about h2 {
+    text-align: center;
+    color: var(--light-blue);
+    background: var(--body);
+    transform: translateY(-20px);
+    /* padding: 1rem; */
+  }
+  .about-card-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 70px;
+  }
+
+  #faq {
+    background-color: var(--dark-blue);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+
+  #faq h2,
+  p {
+    text-align: center;
+  }
+  #faq p {
+    font-size: 0.75rem;
+    padding: 10px;
+    color: var(--light-blue);
+  }
+
+  #faq form {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  #faq form .input-set {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  #faq form .input-set input,
+  #faq form .input-set textarea {
+    width: 100%;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid var(--light-blue);
+    background: var(--sm-light-blue);
+    color: white;
+    padding: 5px;
+    font-size: 0.9rem;
+  }
+  #faq form .input-set input {
+    height: 40px;
+  }
+  #faq form .input-set input::placeholder,
+  #faq form .input-set textarea::placeholder {
+    color: var(--light-blue);
+  }
+
+  #faq form button {
+    width: 100%;
+    height: 40px;
+    outline: none;
+    border: 1px solid var(--light-blue);
+    border: none;
+    border-radius: 10px;
+    background-color: var(--primary);
+    color: white;
+    font-size: 1.2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px
+  }
+
 </style>

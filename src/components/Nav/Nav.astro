@@ -5,31 +5,35 @@ import NavAccount from "./NavAccount.astro";
 ---
 
 <script>
-  const search_input = document.getElementById("search");
-  const toggle_nav = document.querySelector(".toggle-nav");
-  const sidebar = document.querySelector(".sidebar");
+  document.addEventListener("astro:page-load", () => {
+    const search_input = document.getElementById("search");
+    const toggle_nav = document.querySelector(".toggle-nav");
+    const sidebar = document.querySelector(".sidebar");
+    toggle_nav.addEventListener("click", function () {
+      //  toggle on toggle_nav the class "active"
+      if (toggle_nav.classList.contains("nav-active")) {
+        toggle_nav.classList.remove("nav-active");
+        sidebar.classList.remove("sidebar-active");
+      } else {
+        toggle_nav.classList.add("nav-active");
 
-  toggle_nav.addEventListener("click", function () {
-    //  toggle on toggle_nav the class "active"
-    if (toggle_nav.classList.contains("nav-active")) {
-      toggle_nav.classList.remove("nav-active");
-      sidebar.classList.remove("sidebar-active");
-    } else {
-      toggle_nav.classList.add("nav-active");
+        sidebar.classList.add("sidebar-active");
+      }
+    });
 
-      sidebar.classList.add("sidebar-active");
-    }
-  });
-
-  document.querySelector(".search-bar").addEventListener("click", function () {
-    // Do focus on input element with class search
-    search_input.focus();
-  });
-  // Show a log in cosole when element with search class is on focus and the enter key was pressed
-  search_input.addEventListener("keyup", function (e) {
-    if (e.keyCode == 13) {
-      alert(`Searching ${search_input.value}`);
-    }
+    document
+      .querySelector(".search-bar")
+      .addEventListener("click", function () {
+        // Do focus on input element with class search
+        search_input.focus();
+      });
+    // Show a log in cosole when element with search class is on focus and the enter key was pressed
+    search_input.addEventListener("keyup", function (e) {
+      if (e.keyCode == 13) {
+        //@ts-ignore
+        alert(`Searching ${search_input.value}`);
+      }
+    });
   });
 </script>
 
@@ -58,19 +62,24 @@ import NavAccount from "./NavAccount.astro";
       </div>
     </li>
     <li>
-      <NavAccount/>
+      <NavAccount />
     </li>
   </ul>
-  <div class="sidebar">
+  <div class="sidebar nav-blur">
     <div class="sidebar-content">
       <h3 style="margin-bottom: 20px;">Prisma Store</h3>
       <SidebarSet tag="Pages" icon="bx bxs-card">
-        <SidebarElement tag="Home" icon="bx bxs-home"/>
-        <SidebarElement tag="About" icon="bx bx-detail"/>
+        <SidebarElement tag="Home" icon="bx bxs-home" href="/" />
+        <SidebarElement
+          tag="Products"
+          icon="bx bxs-store-alt"
+          href="/products"
+        />
+        <SidebarElement tag="About" icon="bx bx-detail" href="/#about" />
       </SidebarSet>
 
       <SidebarSet tag="Ecomerce" icon="bx bxl-shopify">
-        <SidebarElement tag="Sell" icon="bx bxs-purchase-tag"/>
+        <SidebarElement tag="Sell" icon="bx bxs-purchase-tag" href="/" />
       </SidebarSet>
     </div>
   </div>
@@ -91,11 +100,13 @@ import NavAccount from "./NavAccount.astro";
     left: -40px; /* Hide on load */
     width: 0;
     height: calc(100vh - var(--nav-width)); /* Full-height sidebar/background */
-    background: #171d2e; /* Gray background color */
+    /* background: var(--darker-blue);   */
     transition: all 0.3s ease; /* Smooth transitions */
     z-index: 99; /* Specify what should be on top */
     overflow: hidden;
     border-right: 1px solid var(--sm-light-blue);
+    /* background: #13151ac0;
+    backdrop-filter: blur(10px); */
   }
   .sidebar-active {
     width: var(--side-width);
@@ -113,13 +124,22 @@ import NavAccount from "./NavAccount.astro";
     width: 100%;
     height: var(--nav-width);
     padding: 0.2rem;
-    background-color: #13151a36;
-    backdrop-filter: blur(10px);
+    background-color: #13151ac0;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #4a526648;
     z-index: 100;
+  }
+  nav::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(10px);
+    z-index: -1;
+  }
+  .nav-blur {
+    background-color: #13151ac0;
+    backdrop-filter: blur(10px);
   }
 
   nav ul {
@@ -196,6 +216,4 @@ import NavAccount from "./NavAccount.astro";
 
     /* background-color: yellow; */
   }
-
-  
 </style>

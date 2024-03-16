@@ -1,0 +1,166 @@
+---
+import { getProductByID } from "../../libs/products.js";
+import Layout from "../../layouts/Layout.astro";
+
+const { id } = Astro.params;
+export const prerender = false;
+
+const product = getProductByID(id);
+const stars = new Array(product.feature).fill("star");
+---
+
+<Layout title={product.product}>
+  <section>
+    <div id="product">
+      <div class="product-image" transition:name={`products-${id}`}>
+        <img src={product.thumbnail} alt="" />
+      </div>
+      <div class="product-details">
+        <h1 transition:name={`products-name-${id}`}>{product.product}</h1>
+
+        <div class="feature-content">
+          <div class="stars">
+            {stars.map((e) => <i class="bx bxs-star" />)}
+            <span>{product.feature + "/5"}</span>
+          </div>
+          <div class="buys">
+            {product.buys}
+            <span><i class="bx bxs-cart"></i></span>
+          </div>
+        </div>
+        <p>{product.description}</p>
+        <div class="button-sec">
+          <a href="/products">
+            <i class="bx bx-arrow-back"></i>
+          </a>
+          <a>
+            <span>${product.prize} <i class="bx bxs-cart"></i></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  section {
+    min-height: 100vh;
+  }
+  #product {
+    padding: 5px;
+    margin-top: 65px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* max-width: 600px; */
+    /* box-shadow: 0 0 10px; */
+  }
+  .product-image {
+    width: 100%;
+    height: 300px;
+    background-color: #00000097;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 600px;
+  }
+  .product-image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  .product-details {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 25px;
+  }
+  .product-details h1 {
+    align-self: flex-start;
+  }
+  .product-details a {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 10px 20px;
+    outline: none;
+    border: none;
+    border-radius: 100vw;
+    font-weight: 800;
+    background: #087236;
+    color: white;
+    border: 1px solid white;
+    transition: 0.3s;
+    overflow: hidden;
+    width: 100%;
+    flex: 1.75;
+  }
+  .product-details a:hover {
+    background-color: #10bc5a;
+  }
+  .button-sec {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+  }
+  .button-sec a:nth-child(1) {
+    background-color: transparent;
+    border: 1px solid var(--light-blue);
+    color: var(--light-blue);
+    flex: 1;
+    justify-content: center;
+    font-size: 1.3rem;
+  }
+
+  .button-sec a:nth-child(2) {
+    transform: scale(1.1);
+    animation: buy infinite ease-in-out 1s;
+  }
+
+  @keyframes buy {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .feature-content {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    font-size: smaller;
+    color: var(--light-blue);
+  }
+  .stars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+  }
+  .stars span {
+    margin-left: 10px;
+  }
+
+  @media (min-width: 1150px) {
+    .product-details {
+      justify-content: space-between;
+    }
+    .product-details h1 {
+      justify-self: start;
+    }
+  }
+</style>

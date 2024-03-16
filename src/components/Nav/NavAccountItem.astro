@@ -1,0 +1,23 @@
+---
+interface Props {
+  tag: string;
+  href: string;
+  icon:string
+}
+
+const { tag, href, icon } = Astro.props;
+---
+
+<a href={href} class="account-item">
+  <span><i class={icon}></i></span>
+  {tag}
+</a>
+
+<style>
+  .account-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 0.8rem;
+  }
+</style>

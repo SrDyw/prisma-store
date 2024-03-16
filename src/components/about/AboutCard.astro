@@ -1,0 +1,33 @@
+---
+const { icon } = Astro.props;
+---
+
+<div class="about-card">
+  <slot> Lorem ipsum dolor sit amet consectetur adipisicing elit.</slot>
+  <i class:list={[
+    'bx',
+    [icon]
+  ]}></i>
+</div>
+
+<style>
+  .about-card {
+    width: 140px;
+    height: 200px;
+    background-color: var(--black-blue);
+    border-radius: 10px;
+    border: 1px solid var(--dark-blue);
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    flex-direction: column;
+    color: var(--light-blue);
+  }
+
+  .about-card .bx {
+    font-size: 1.75rem;
+  }
+</style>
