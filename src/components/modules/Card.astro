@@ -1,0 +1,101 @@
+---
+const { name, icon } = Astro.props;
+---
+
+<script>
+  const cards = document.querySelectorAll(".card");
+  const borders = document.querySelectorAll(".card-border");
+
+  const setup = (elements, tag = "card") => {
+    elements.forEach((element) =>
+      element.addEventListener("mousemove", (e) => {
+        // @ts-ignore
+        const mousex = e.clientX,
+          mousey = e.clientY;
+        const { target } = e;
+        // @ts-ignore
+
+        const rect = target.getBoundingClientRect();
+        const x = mousex - rect.x,
+          y = mousey - rect.y;
+
+        // @ts-ignore
+        target.style.setProperty(`--${tag}-mouse-x`, `${x}px`);
+        // @ts-ignore
+        target.style.setProperty(`--${tag}-mouse-y`, `${y}px`);
+      })
+    );
+  };
+  setup(cards);
+  setup(borders, "border");
+</script>
+
+<div class="card">
+  <div class="card-border"></div>
+  <div class="card-body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .card-border {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 3px);
+    height: calc(100% + 3px);
+    /* background-color: blue; */
+    border-radius: inherit;
+    z-index: -1;
+  }
+  .card {
+    padding: 10px 20px;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    background: white;
+    /* border: 2px solid #8181ff; */
+    color: black;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px #0000000c;
+  }
+  .card-border::after,
+  .card::after {
+    content: "";
+    position: absolute;
+    background: radial-gradient(
+      1500px circle at var(--card-mouse-x) var(--card-mouse-y),
+      #0000ff27,
+      transparent 20%
+    );
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: 0.4s;
+  }
+  .card-border::after {
+    background: radial-gradient(
+      700px circle at var(--card-mouse-x) var(--card-mouse-y),
+      #0000ff83,
+      transparent 20%
+    );
+  }
+  .card:hover .card-border::after,
+  .card:hover::after {
+    opacity: 1;
+  }
+  .card .card-body{
+    transform: scale(1);
+    transition: .2s;
+
+  }
+  .card:hover .card-body {
+    transform: scale(1.1)
+  }
+</style>

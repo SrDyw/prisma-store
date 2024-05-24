@@ -1,0 +1,37 @@
+---
+const { src, name, avatarSize, fontSize, direction } = Astro.props;
+---
+
+<div class="avatar" style={`font-size: ${fontSize || '1rem'}; flex-direction: ${direction}`}>
+  <div class="avatar-img" style={`width: ${avatarSize || '30px'}; height: ${avatarSize || '30px'}`}>
+    <img src={src} alt="Avatar image" />
+  </div>
+  <div class="name">{name}</div>
+</div>
+
+<style>
+  .avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    color: darkslategray;
+  }
+
+  .avatar span:nth-child(even) {
+    opacity: 0.75;
+    /* color: #0000ff; */
+  }
+
+  .avatar-img {
+    background-color: darkslategray;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-img > img {
+    object-fit: cover;
+    width: 100%;
+  }
+</style>

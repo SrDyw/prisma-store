@@ -1,0 +1,194 @@
+---
+import Skill from "./SkillCard.astro";
+
+const skills = [
+  { name: "React", icon: "react" },
+  { name: "HTML5", icon: "html" },
+  { name: "Javascript", icon: "js" },
+  { name: "CSS", icon: "css" },
+  { name: "TailwdindCSS", icon: "tailwind" },
+  { name: "NestJS", icon: "nestjs" },
+  { name: "Unity", icon: "unity" },
+  { name: "Astro", icon: "astro" },
+  { name: "Nuxt3", icon: "nuxt" },
+];
+---
+
+<script>
+  const tab_element = document.querySelectorAll(".tab-element");
+  const descriptions = document.querySelectorAll(".desc");
+
+  descriptions[0].classList.add("desc-active");
+
+  tab_element.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      tab_element.forEach((tab) => tab.classList.remove("tab-active"));
+      descriptions.forEach((des) => des.classList.remove("desc-active"));
+
+      tab.classList.add("tab-active");
+      if (!descriptions[index].classList.contains("desc-active"))
+        descriptions[index].classList.add("desc-active");
+    });
+  });
+</script>
+
+<section id="about">
+  <h2>Who I am?</h2>
+  <div class="wrapper">
+    <div class="left-side">
+      <div class="about-icon"></div>
+    </div>
+    <div class="right-side">
+      <div class="tabs">
+        <div class="tab-element tab-active overview">
+          <p>Overview</p>
+        </div>
+        <div class="tab-element skills">
+          <p>Skills</p>
+        </div>
+      </div>
+      <div class="desc-content">
+        <div class="desc overview-desc">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
+          praesentium consequatur iure sapiente, labore sit cupiditate cum
+          architecto aperiam nobis minus consequuntur ipsum omnis hic.
+          Distinctio, vitae? Facere, sed maxime.
+        </div>
+        <div class="desc skils-desc">
+          {
+            skills.map((skill, index) => (
+              <div class="skill-element" style={`--index:${index}`}>
+                <Skill name={skill.name} icon={skill.icon} />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #about {
+    min-height: 100vh;
+    position: relative;
+    padding-inline: 60px;
+  }
+  #about h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 50px;
+  }
+
+  #about .wrapper {
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr;
+    width: 100%;
+    min-height: 500px;
+  }
+
+  #about .left-side {
+    display: flex;
+    align-items: center;
+  }
+
+  .right-side {
+    /* background-color: purple; */
+  }
+
+  .about-icon {
+    margin-top: 120px;
+    width: 400px;
+    height: 400px;
+    background-color: blue;
+    border-radius: 20px;
+  }
+
+  #about .tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 70px;
+    margin-top: 30px;
+    font-size: 1.5rem;
+    user-select: none;
+  }
+
+  #about .tabs .tab-element {
+    text-align: center;
+    position: relative;
+
+    cursor: pointer;
+    /* border: 3px solid white; */
+    /* border: 1px solid #ffffff; */
+    border-bottom: 3px solid #83c5be;
+
+    transition: 0.2s;
+  }
+
+  #about .tabs .tab-element:hover {
+    background: #5353533a;
+  }
+
+  #about .tabs .tab-active {
+    border-bottom: 3px solid #03373b;
+
+    font-weight: 600;
+    color: #354d4e;
+  }
+
+  #about .tabs .tab-element p {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    opacity: 0.5;
+  }
+
+  #about .tabs .tab-active p {
+    opacity: 1;
+  }
+
+  .desc-content {
+    margin-top: 20px;
+    min-height: 200px;
+    position: relative;
+    font-size: 1.5rem;
+  }
+
+  .desc {
+    position: absolute;
+    width: 100%;
+    top: 10px;
+    opacity: 0;
+    transition: 0.2s;
+  }
+
+  .desc-active {
+    top: 0px;
+    opacity: 1;
+    transition: 0.2s;
+    transition-delay: 0.2s;
+  }
+
+  .skils-desc {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 10px;
+  }
+
+  .skill-element {
+    opacity: 0;
+    transition: 0.2s;
+    transform: translateY(20px);
+    transform: scale(0.8);
+  }
+
+  .desc-active > .skill-element {
+    opacity: 1;
+    transform: translateY(0);
+    transform: scale(1);
+    transition: 0.5s;
+    transition-delay: calc(0.05s * var(--index));
+  }
+</style>

@@ -1,11 +1,11 @@
 ---
 // @ts-ignore
-import Nav from '../components/Nav/Nav.astro';
-import Footer from '../components/footer/Footer.astro';
 import { ViewTransitions } from "astro:transitions";
+import Navbar from '../components/navbar/Navbar.astro'
+import TooltipSetup from '../components/modules/Tooltip/TooltipSetup.astro'
 
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -13,65 +13,73 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-		<ViewTransitions/>
-	</head>
-	<body>
-		<Nav/>
-		<slot />
-		<Footer/>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <ViewTransitions />
+  </head>
+  <body>
+    <header>
+      <Navbar/>
+    </header>
+    <slot />
+    <TooltipSetup/>
+  </body><style is:global>
+    * {
+      padding: 0px;
+      margin: 0;
+      list-style: none;
+      box-sizing: border-box;
+      text-decoration: none;
+    }
+    a {
+      color: white;
+    }
+    :root {
+      --accent: 136, 58, 234;
+      --accent-light: 224, 204, 250;
+      --accent-dark: 49, 10, 101;
+      --light-blue: #7985c7;
+      --darker-blue: #171d2e;
+      --black-blue: #13161d;
+      --dark-blue: #1a2352;
+      --primary: #0f59e4;
+      --secondary: #ffb228;
+      --danger: #f24e38;
+      --successful: #48a032;
+      --sm-light-blue: #7985c760;
+      --body: #13151a;
+      --accent-gradient: linear-gradient(
+        45deg,
+        rgb(var(--accent)),
+        rgb(var(--accent-light)) 30%,
+        white 60%
+      );
+    }
+    html {
+      font-family: system-ui, sans-serif;
+      background: #fcfcfc;
+      background-size: 224px;
+      scroll-behavior: smooth;
+    }
+    code {
+      font-family:
+        Menlo,
+        Monaco,
+        Lucida Console,
+        Liberation Mono,
+        DejaVu Sans Mono,
+        Bitstream Vera Sans Mono,
+        Courier New,
+        monospace;
+    }
+  </style>
 </html>
-<style is:global>
-	* {
-		padding: 0px;
-		margin: 0;
-		list-style: none;
-		box-sizing: border-box;
-		text-decoration: none;
-	}
-	a {
-		color:white
-	}
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--light-blue: #7985c7;
-		--darker-blue: #171d2e;
-		--black-blue: #13161d;
-		--dark-blue: #1a2352;
-		--primary:#0f59e4;
-		--sm-light-blue: #7985c760;
-		--body: #13151a;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-</style>

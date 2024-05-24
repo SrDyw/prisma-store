@@ -1,0 +1,52 @@
+---
+const { value } = Astro.props;
+---
+
+<div class={`tooltip`}>
+  <div class="tip">{value}</div>
+  <slot />
+</div>
+
+<style>
+  .tooltip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+  }
+
+  .tip {
+    position: absolute;
+    top: calc(100% + 5px);
+
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: normal;
+    opacity: 0;
+    transition: 0.2s;
+    background-color: #0a4347;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    pointer-events: none;
+  }
+  .tip::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    background-color: #0a4347;
+    width: 10px;
+    aspect-ratio: 1;
+    border-radius: 3px;
+  }
+
+  .show .tip {
+    top: calc(100% + 10px);
+    opacity: 1;
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+import Card from "../../modules/Card.astro";
+
+const { name, icon, progress } = Astro.props;
+---
+
+<script></script>
+<Card>
+  <div class="skill-wrapper">
+    <div class="skill-header">
+      <div class="skill-img-wrapper">
+        <img src={`/${icon}.png`} alt="skill icon" />
+      </div>
+      {name}
+    </div>
+  </div>
+</Card>
+
+<style>
+  .skill-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .skill-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .skill-img-wrapper {
+    width: 60px;
+    aspect-ratio: 1;
+    position: relative;
+  }
+
+  .skill-img-wrapper > img {
+    width: 100%;
+    object-fit: cover;
+  }
+</style>

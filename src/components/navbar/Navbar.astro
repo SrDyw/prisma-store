@@ -1,0 +1,187 @@
+---
+import Avatar from "../modules/Avatar.astro";
+import Tooltip from "../modules/Tooltip/Tooltip.astro";
+---
+
+<script>
+  const nav = document.getElementById("navbar");
+  const sections = document.querySelectorAll("section");
+  const navbar_element = document.querySelectorAll(".navbar-element");
+
+  navbar_element[0].classList.add("active");
+
+  document.addEventListener("scroll", (e) => {
+    const tag = "nav-scrolled";
+    if (window.scrollY > 10) {
+      if (!nav.classList.contains(tag)) nav.classList.add(tag);
+    } else {
+      nav.classList.remove(tag);
+    }
+
+    navbar_element.forEach((n) => n.classList.remove("active"));
+
+    let current_section_index = 0;
+    let distance = Number.MAX_SAFE_INTEGER;
+    sections.forEach((section, i) => {
+      var section_distance = Math.abs(window.scrollY - section.offsetTop);
+      if (section_distance < distance) {
+        distance = section_distance;
+        current_section_index = i;
+      }
+    });
+
+    navbar_element[current_section_index].classList.add("active");
+  });
+</script>
+
+<nav id="navbar">
+  <div class="brand">
+    <Tooltip value="See Github profile">
+      <a href="https://github.com/SrDyw" target="_blank">
+        <Avatar
+          src="https://avatars.githubusercontent.com/u/96890386?v=4"
+          name="Dayniel Martinez"
+        />
+      </a>
+    </Tooltip>
+  </div>
+  <ul>
+    <li class="navbar-element">
+      <a href="#home">Home</a>
+    </li>
+    <li class="navbar-element">
+      <a href="#about">About</a>
+    </li>
+    <li class="navbar-element">
+      <a href="#project">Project</a>
+    </li>
+    <li class="navbar-element contact">
+      <a href="#contact">
+        <div class="border-effect">
+          <div class="effect"></div>
+        </div>
+        Contact
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<style>
+  :root {
+    --transtion-speed: 0.2s;
+  }
+
+  nav {
+    width: 100vw;
+    height: 50px;
+    position: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transtion-speed);
+    z-index: 100;
+  }
+
+  .nav-scrolled {
+    background-color: white;
+    transition: var(--transtion-speed);
+    box-shadow: -10px 10px 10px #00000018;
+
+    height: 70px;
+  }
+
+  .brand {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+
+    transition: var(--transtion-speed);
+  }
+
+  .nav-scrolled ul {
+    gap: 20px;
+    transition: var(--transtion-speed);
+  }
+
+  nav ul a {
+    color: black;
+    padding: 10px 20px;
+  }
+
+  nav ul li {
+    position: relative;
+  }
+
+  nav ul li::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 5px;
+    background-color: transparent;
+    border-radius: 20px;
+
+    transition: var(--transtion-speed);
+    bottom: -20px;
+  }
+
+  nav ul .active::after {
+    bottom: -10px;
+
+    background-color: #006d77;
+    transition: var(--transtion-speed);
+  }
+
+  .contact > a {
+    background: white;
+    position: relative;
+  }
+
+  .border-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: calc(100% + 5px);
+    height: calc(100% + 5px);
+
+    z-index: -1;
+
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    opacity: 1;
+    transition: 0.2s;
+  }
+
+  .active .border-effect {
+    opacity: 0;
+  }
+
+  .border-effect .effect {
+    width: 150%;
+    height: 30px;
+    background-color: black;
+    animation: 2s rotate infinite linear;
+  }
+
+  @keyframes rotate {
+    0% {
+      rotate: 0deg;
+    }
+    100% {
+      rotate: 360deg;
+    }
+  }
+</style>
